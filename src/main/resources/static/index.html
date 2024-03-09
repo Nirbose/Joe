@@ -1,5 +1,21 @@
 <html>
 <body>
     <h2>Example</h2>
+    <div id="content">
+    </div>
+    <script>
+        fetch('/api')
+            .then(response => response.json())
+            .then(data => {
+                let v = document.querySelector(`#${data.uuid}`);
+
+                data.forEach((item) => {
+                    let div = document.createElement('div');
+                    div.innerHTML = item.uuid;
+                    document.getElementById('content').appendChild(div);
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
 </body>
 </html>

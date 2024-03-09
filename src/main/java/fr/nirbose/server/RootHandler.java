@@ -2,8 +2,11 @@ package fr.nirbose.server;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import fr.nirbose.Joe;
 
 import java.io.*;
+import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 
 public class RootHandler implements HttpHandler
 {
@@ -20,7 +23,6 @@ public class RootHandler implements HttpHandler
 
             while ((line = bufferedReader.readLine()) != null)
             {
-                System.out.println(line);
                 resp.append(line);
             }
             bufferedReader.close();

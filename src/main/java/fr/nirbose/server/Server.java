@@ -10,17 +10,34 @@ public class Server
 
     public final static int DEFAULT_PORT = 8080;
 
-    public static void create() throws IOException
+    public static void create()
     {
         create(DEFAULT_PORT);
     }
 
-    public static void create(int port) throws IOException
+    public static void create(int port)
     {
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        server.createContext("/", new RootHandler());
-        server.setExecutor(null);
-        server.start();
+        startHttpServer(port);
     }
 
+    private static void startHttpServer(int port)
+    {
+        Thread thread = new Thread(() -> {
+            try
+            {
+                HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+                server.createContext("/", new RootHandler());
+                server.createContext("/api", new ApiHandler());
+                server.setExecutor(null);
+
+                server.start();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        });
+
+        thread.start();
+    }
 }

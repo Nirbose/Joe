@@ -1,22 +1,24 @@
 package fr.nirbose;
 
 import fr.nirbose.server.Server;
-
-import java.io.IOException;
+;import java.util.UUID;
 
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws InterruptedException
     {
-        System.out.println("Hello world!");
+        Server.create();
 
-        try
-        {
-            Server.create();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        Thread.sleep(5000);
+
+
+
+
+
+
+
+
+
+        Joe.print(new Data(UUID.randomUUID(), "Hello World", 0, "Main"));
     }
 }
